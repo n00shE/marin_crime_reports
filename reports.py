@@ -2,9 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import os
+import csv
 #import urllib2
 #from bs4 import BeautifulSoup
-import csv
+
 
 #Script to automate police listings collection
 #Written by Ryan Blanchard
