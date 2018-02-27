@@ -5,7 +5,6 @@ import os
 #import urllib2
 #from bs4 import BeautifulSoup
 import csv
-from datetime import datetime
 
 #Script to automate police listings collection
 #Written by Ryan Blanchard
