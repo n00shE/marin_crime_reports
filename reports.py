@@ -51,8 +51,9 @@ sausalitopd_csv = "sausalitopd.csv"
 chp_csv = "chp.csv"
 doc_csv = "doc.csv"
 millvalleypd_csv = "millvalleypd.csv"
-pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv]
-pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD',] 
+probation_csv = "probation.csv"
+pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv]
+pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation'] 
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
 #open webpage and navigate to 48hr listing
