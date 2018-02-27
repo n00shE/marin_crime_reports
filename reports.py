@@ -16,7 +16,7 @@ TO-DO
 -add other departments
 '''
 
-firstrun = True
+firstrun = False
 
 names = []
 address = []
@@ -191,25 +191,31 @@ for index, name in enumerate(names):
 #Begin export process
 allarrests = [names, address, orig_booking_date, latest_charge_date, arrest_date, arrest_agency, arrest_location, jail_id, dob, occupation, sex, height, weight, race, hair_color, eye_color]
 #print(allarrests)
-
+dont_process = []
 for pdindex, pd in enumerate(pds): #iterate through pd csvs
-	with open(pd, "a") as csvfile:
-		writer = csv.DictWriter(csvfile, fieldnames=fields)
-		if firstrun:
-			writer.writeheader() #run this once
-		for index, name in enumerate(names):
-			temprange = range(0, lines[index])
-			charged = []
-			for i in temprange:
-				charged.append(charges[stored_chargeindex[index] + lineloop[index][i]])
-			if allarrests[5][index] == pd_name[pdindex]:
-				if any('spouse' in s for s in charged):
-					writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
-				else:
-					pass
-			else:
-				pass
-	
+	for index, name in enumerate(names):
+		temprange = range(0, lines[index])
+		charged = []
+		if not os.path.isfile(pd):
+			open(pd, "w")
+		with open(pd, "r") as csvfileread:
+			reader = csv.reader(csvfileread, delimiter=',')
+			for row in reader:
+				for info in row:
+					if info == latest_charge_date[index]:
+						dont_process = name
+			csvfileread.close()
+			with open(pd, "a") as csvfile:
+				writer = csv.DictWriter(csvfile, fieldnames=fields)
+				if firstrun:
+					writer.writeheader() #run this once
+				for i in temprange:
+					charged.append(charges[stored_chargeindex[index] + lineloop[index][i]])
+				if allarrests[5][index] == pd_name[pdindex]:
+					if dont_process != name:
+						print("processesed")
+						if any('spouse' in s for s in charged):
+							writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
 				
 driver.close()
 csvfile.close()
