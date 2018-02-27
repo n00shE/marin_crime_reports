@@ -201,7 +201,10 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 		temprange = range(0, lines[index])
 		charged = []
 		if not os.path.isfile(pd):
-			open(pd, "w")
+			with open(pd, "w") as csvfilewrite
+				writer = csv.DictWriter(csvfile, fieldnames=fields)
+				if firstrun == True:
+					writer.writeheader() #run this once
 		with open(pd, "r") as csvfileread:
 			reader = csv.reader(csvfileread, delimiter=',')
 			for row in reader:
@@ -210,9 +213,6 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 						dont_process = name
 			csvfileread.close()
 			with open(pd, "a") as csvfile:
-				writer = csv.DictWriter(csvfile, fieldnames=fields)
-				if firstrun:
-					writer.writeheader() #run this once
 				for i in temprange:
 					charged.append(charges[stored_chargeindex[index] + lineloop[index][i]])
 				if allarrests[5][index] == pd_name[pdindex]:
