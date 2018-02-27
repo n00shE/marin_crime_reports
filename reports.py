@@ -53,7 +53,7 @@ chp_csv = "chp.csv"
 doc_csv = "doc.csv"
 millvalleypd_csv = "millvalleypd.csv"
 pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv]
-pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'y', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD',] 
+pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD',] 
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
 #open webpage and navigate to 48hr listing
@@ -96,6 +96,9 @@ arrest_date = [x.text for x in arrestdate_elements]
 #find arrest agency
 arrestagency_elements = driver.find_elements_by_xpath('//*[@id="sec1"]/div[1]/table/tbody/tr[6]/td')
 arrest_agency = [x.text for x in arrestagency_elements]
+for agency in arrest_agency:
+	if agency not in pd_name:
+		print("Need to add " + agency + " to police departments")
 #print(arrest_agency)
 
 #find arrest location
