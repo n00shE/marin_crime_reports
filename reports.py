@@ -54,7 +54,7 @@ doc_csv = "doc.csv"
 millvalleypd_csv = "millvalleypd.csv"
 probation_csv = "probation.csv"
 pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv]
-pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation'] 
+pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation']
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
 #open webpage and navigate to 48hr listing
@@ -66,8 +66,8 @@ elem.click()
 #number of bookings
 #bookings = driver.find_elements_by_xpath('//*[@id="menu-sub"]/p/span[1]/strong')
 #bookings_text = [x.text for x in bookings]
-#bookings_clean = 
-#print(bookings_text) 
+#bookings_clean =
+#print(bookings_text)
 
 #find names
 name_elements = driver.find_elements_by_xpath('//*[@id="sec1"]/h2')
@@ -154,7 +154,7 @@ eye_color = [x.text for x in eyecolor_elements]
 
 #find charges
 #charges_elements = driver.find_elements_by_xpath('//*[@id="sec2"]/table')
-charges_elements = driver.find_elements(By.TAG_NAME, "tr") 
+charges_elements = driver.find_elements(By.TAG_NAME, "tr")
 charges = [x.text for x in charges_elements]
 #print(charges)
 
@@ -189,7 +189,7 @@ for index, name in enumerate(names):
 		temprange = range(1, lines[index])
 		#print temprange
 		for i in temprange:
-			perm_chargeindex.append(charges[stored_chargeindex[index] + lineloop[index][i]]) 
+			perm_chargeindex.append(charges[stored_chargeindex[index] + lineloop[index][i]])
 #print(perm_chargeindex)
 '''
 
@@ -223,7 +223,7 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 					if any('spouse' in s for s in charged):
 						writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
 			csvfile.close()
-			
+
 driver.close()
 #STATIC PAGE
 #scrape the page
