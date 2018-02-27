@@ -201,10 +201,11 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 		temprange = range(0, lines[index])
 		charged = []
 		if not os.path.isfile(pd):
-			with open(pd, "w") as csvfilewrite
-				writer = csv.DictWriter(csvfile, fieldnames=fields)
+			with open(pd, "w") as csvfilewrite:
+				writer = csv.DictWriter(csvfilewrite, fieldnames=fields)
 				if firstrun == True:
 					writer.writeheader() #run this once
+			csvfilewrite.close()
 		with open(pd, "r") as csvfileread:
 			reader = csv.reader(csvfileread, delimiter=',')
 			for row in reader:
@@ -212,17 +213,17 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 					if info == latest_charge_date[index]:
 						dont_process = name
 			csvfileread.close()
-			with open(pd, "a") as csvfile:
-				for i in temprange:
-					charged.append(charges[stored_chargeindex[index] + lineloop[index][i]])
-				if allarrests[5][index] == pd_name[pdindex]:
-					if dont_process != name:
-						if any('spouse' in s for s in charged):
-							writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
-				
+		with open(pd, "a") as csvfile:
+			writer = csv.DictWriter(csvfile, fieldnames=fields)
+			for i in temprange:
+				charged.append(charges[stored_chargeindex[index] + lineloop[index][i]])
+			if allarrests[5][index] == pd_name[pdindex]:
+				if dont_process != name:
+					if any('spouse' in s for s in charged):
+						writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
+			csvfile.close()
+			
 driver.close()
-csvfile.close()
-
 #STATIC PAGE
 #scrape the page
 #site = 'https://apps.marincounty.org/BookingLog/Booking/Action'
