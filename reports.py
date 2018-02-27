@@ -16,6 +16,8 @@ TO-DO
 -add other departments
 '''
 
+firstrun = True
+
 names = []
 address = []
 orig_booking_date = []
@@ -194,7 +196,8 @@ allarrests = [names, address, orig_booking_date, latest_charge_date, arrest_date
 for pdindex, pd in enumerate(pds): #iterate through pd csvs
 	with open(pd, "a") as csvfile:
 		writer = csv.DictWriter(csvfile, fieldnames=fields)
-		#writer.writeheader() #run this once
+		if firstrun:
+			writer.writeheader() #run this once
 		for index, name in enumerate(names):
 			temprange = range(0, lines[index])
 			charged = []
