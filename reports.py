@@ -1,8 +1,8 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import os
 import csv
+import datetime
 #import urllib2
 #from bs4 import BeautifulSoup
 
@@ -14,6 +14,9 @@ import csv
 TO-DO
 -add other departments
 '''
+
+now = datetime.datetime.now()
+print("Log for " + str(now.day) + "/" + str(now.month) + "/" + str(now.year) + " at " + str(now.hour) + ":" + str(now.minute) +":" + str(now.second))
 
 firstrun = False
 
@@ -60,11 +63,15 @@ pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_cs
 pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation', 'College of Marin PD', 'Tiburon PD', 'Ross PD', 'Belvedere PD']
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
+print("Opening Browser")
+
 #open webpage and navigate to 48hr listing
 driver = webdriver.Firefox()
 driver.get("https://apps.marincounty.org/BookingLog/")
 elem = driver.find_elements_by_xpath('//*[@id="no-sidebar-main-content"]/div[2]/form/div/div[2]/input[1]')[0]
 elem.click()
+
+print("Scraping Web Page")
 
 #number of bookings
 #bookings = driver.find_elements_by_xpath('//*[@id="menu-sub"]/p/span[1]/strong')
@@ -200,6 +207,8 @@ for index, name in enumerate(names):
 allarrests = [names, address, orig_booking_date, latest_charge_date, arrest_date, arrest_agency, arrest_location, jail_id, dob, occupation, sex, height, weight, race, hair_color, eye_color]
 #print(allarrests)
 
+print("Starting Logic")
+
 for pdindex, pd in enumerate(pds): #iterate through pd csvs
 	for index, name in enumerate(names):
 		temprange = range(0, lines[index])
@@ -227,6 +236,8 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 						writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
 			csvfile.close()
 driver.close()
+
+print("Done")
 
 #STATIC PAGE
 #scrape the page
