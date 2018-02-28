@@ -59,8 +59,9 @@ compd_csv = "compd.csv"
 tiburonpd_csv = "tiburonpd.csv"
 rosspd_csv = "rosspd.csv"
 belvederepd_csv = "belvederepd.csv"
-pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv, compd_csv, tiburonpd_csv, rosspd_csv, belvederepd_csv]
-pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation', 'College of Marin PD', 'Tiburon PD', 'Ross PD', 'Belvedere PD']
+court_csv = "court.csv"
+pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv, compd_csv, tiburonpd_csv, rosspd_csv, belvederepd_csv, court_csv]
+pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation', 'College of Marin PD', 'Tiburon PD', 'Ross PD', 'Belvedere PD', 'Court']
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
 if not os.path.isfile('.firstrun'):
