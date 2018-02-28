@@ -63,10 +63,15 @@ pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_cs
 pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation', 'College of Marin PD', 'Tiburon PD', 'Ross PD', 'Belvedere PD']
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
+#if not os.path.isfile('.firstrun'):
+#	firstrun = True
+#	f = open('.firstrun', 'w+')
+#f.close()
+
 print("Opening Browser")
 
 #open webpage and navigate to 48hr listing
-driver = webdriver.Firefox()
+driver = webdriver.Chrome('chromedriver.exe')
 driver.get("https://apps.marincounty.org/BookingLog/")
 elem = driver.find_elements_by_xpath('//*[@id="no-sidebar-main-content"]/div[2]/form/div/div[2]/input[1]')[0]
 elem.click()
