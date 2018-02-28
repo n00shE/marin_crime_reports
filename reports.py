@@ -12,7 +12,6 @@ import csv
 
 '''
 TO-DO
--doc?
 -add other departments
 '''
 
@@ -53,8 +52,9 @@ chp_csv = "chp.csv"
 doc_csv = "doc.csv"
 millvalleypd_csv = "millvalleypd.csv"
 probation_csv = "probation.csv"
-pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv]
-pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation']
+compd_csv = "compd.csv"
+pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv, compd_csv]
+pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation', 'College of Marin PD']
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
 
 #open webpage and navigate to 48hr listing
@@ -225,6 +225,7 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 			csvfile.close()
 
 driver.close()
+
 #STATIC PAGE
 #scrape the page
 #site = 'https://apps.marincounty.org/BookingLog/Booking/Action'
