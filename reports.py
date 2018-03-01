@@ -15,6 +15,8 @@ TO-DO
 -add other departments
 '''
 
+print("Version 1.3")
+
 now = datetime.datetime.now()
 print("Log for " + str(now.day) + "/" + str(now.month) + "/" + str(now.year) + " at " + str(now.hour) + ":" + str(now.minute) +":" + str(now.second))
 
@@ -45,21 +47,21 @@ lineloop = []
 charged = []
 temprange = []
 dont_process = []
-sheriff_csv = "sheriff.csv"
-rafaelpd_csv = "rafaelpd.csv"
-fairfaxpd_csv = "fairfaxpd.csv"
-novatopd_csv = "novatopd.csv"
-centralmarinpd_csv = "centralmarinpd.csv"
-sausalitopd_csv = "sausalitopd.csv"
-chp_csv = "chp.csv"
-doc_csv = "doc.csv"
-millvalleypd_csv = "millvalleypd.csv"
-probation_csv = "probation.csv"
-compd_csv = "compd.csv"
-tiburonpd_csv = "tiburonpd.csv"
-rosspd_csv = "rosspd.csv"
-belvederepd_csv = "belvederepd.csv"
-court_csv = "court.csv"
+sheriff_csv = "departments/sheriff.csv"
+rafaelpd_csv = "departments/rafaelpd.csv"
+fairfaxpd_csv = "departments/fairfaxpd.csv"
+novatopd_csv = "departments/novatopd.csv"
+centralmarinpd_csv = "departments/centralmarinpd.csv"
+sausalitopd_csv = "departments/ausalitopd.csv"
+chp_csv = "departments/chp.csv"
+doc_csv = "departments/doc.csv"
+millvalleypd_csv = "departments/millvalleypd.csv"
+probation_csv = "departments/probation.csv"
+compd_csv = "departments/compd.csv"
+tiburonpd_csv = "departments/tiburonpd.csv"
+rosspd_csv = "departments/rosspd.csv"
+belvederepd_csv = "departments/belvederepd.csv"
+court_csv = "departments/court.csv"
 pds = [sheriff_csv, rafaelpd_csv, fairfaxpd_csv, novatopd_csv, centralmarinpd_csv, sausalitopd_csv, chp_csv, doc_csv, millvalleypd_csv, probation_csv, compd_csv, tiburonpd_csv, rosspd_csv, belvederepd_csv, court_csv]
 pd_name = ['Marin County Sheriff Department', 'San Rafael PD', 'Fairfax PD', 'Novato PD', 'Central Marin Police Authority', 'Sausalito PD', 'California Highway Patrol', 'Department of Corrections', 'Mill Valley PD', 'Probation', 'College of Marin PD', 'Tiburon PD', 'Ross PD', 'Belvedere PD', 'Court']
 fields = ['Name', 'Address', 'Original Booking Date', 'Latest Charge Date', 'Arrest Date', 'Arrest Agency', 'Arrest Location', 'Jail ID', 'DOB', 'Occupation', 'Sex', 'Height', 'Weight', 'Race', 'Hair Color', 'Eye Color', 'Charges']
@@ -115,7 +117,9 @@ arrestagency_elements = driver.find_elements_by_xpath('//*[@id="sec1"]/div[1]/ta
 arrest_agency = [x.text for x in arrestagency_elements]
 for agency in arrest_agency:
 	if agency not in pd_name:
+		print('==========ATTENTION!==========')
 		print("Need to add " + agency + " to police departments")
+		print('==============================')
 #print(arrest_agency)
 
 #find arrest location
@@ -238,12 +242,14 @@ for pdindex, pd in enumerate(pds): #iterate through pd csvs
 				charged.append(charges[stored_chargeindex[index] + lineloop[index][i]])
 			if allarrests[5][index] == pd_name[pdindex]:
 				if dont_process != name:
-					if any('spouse' in s for s in charged):
+					if any('236.1' in s for s in charged) or any('591.5' in s for s in charged) or any('243.4' in s for s in charged) or any('273.5(A)' in s for s in charged) or any('373.6' in s for s in charged) or any('278.5 (A)' in s for s in charged) or any('243(E)(1)' in s for s in charged) or any('646.9(A)' in s for s in charged):
 						writer.writerow({'Name' : allarrests[0][index],'Address' : allarrests[1][index], 'Original Booking Date' : allarrests[2][index], 'Latest Charge Date' : allarrests[3][index], 'Arrest Date' : allarrests[4][index], 'Arrest Agency' : allarrests[5][index], 'Arrest Location' : allarrests[6][index], 'Jail ID' : allarrests[7][index], 'DOB' : allarrests[8][index], 'Occupation' : allarrests[9][index], 'Sex' : allarrests[10][index], 'Height' : allarrests[11][index], 'Weight' : allarrests[12][index], 'Race' : allarrests[13][index], 'Hair Color' : allarrests[14][index], 'Eye Color' : allarrests[15][index], 'Charges' : charged})
 			csvfile.close()
 driver.close()
 
 print("Done")
+
+#any('spouse' in s for s in charged)
 
 #STATIC PAGE
 #scrape the page
