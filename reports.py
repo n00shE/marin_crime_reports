@@ -1,3 +1,5 @@
+#! python2
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import os
@@ -5,7 +7,6 @@ import csv
 import datetime
 #import urllib2
 #from bs4 import BeautifulSoup
-
 
 #Script to automate police listings collection
 #Written by Ryan Blanchard
